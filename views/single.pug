@@ -1,0 +1,54 @@
+h1 #{title}
+
+if post
+  p #{post.title}
+  p #{post.content}
+  p #{post.author}
+  p #{post.tags}
+  p #{post.isPublished}
+  p #{post.createdAt}
+
+  // ✅ Comment form
+  form#commentForm
+    input(type="text", name="content", placeholder="Write your comment")
+    button(type="submit") Add Comment
+
+  if comments
+    each comment in comments
+      p #{comment.content}
+      p #{comment.createdAt}
+      p #{comment._id}
+      form(action="/comments/" + comment._id + "?_method=DELETE", method="POST")
+        button(type="submit") Delete Comment
+      form(action="/comments/edit/" + comment._id, method="GET")
+        button(type="submit") Update Comment
+
+if user
+  p #{user.name}
+  p #{user.email}
+  p #{user.role}
+  p #{user.createdAt}
+
+script.
+  document.getElementById('commentForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const content = this.elements['content'].value;
+    const postId = "#{post._id}";
+    const accessToken = localStorage.getItem('accessToken'); // or get from a cookie
+    console.log(accessToken);
+
+    const res = await fetch(`/comments/${postId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      },
+      body: JSON.stringify({ content })
+    });
+
+    if (res.ok) {
+      location.reload();
+    } else {
+      alert('Error adding comment');
+    }
+  });
