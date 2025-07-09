@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "cross-env DEBUG='myapp2:*' DEBUG_COLORS='true' DEBUG_DEPTH='3' node ./bin/www",
-    "dev": "DEBUG='myapp2:*' DEBUG_COLORS='true' DEBUG_DEPTH='3' nodemon ./bin/www"
+    "start": "node ./bin/www",
+    "dev": "cross-env DEBUG='myapp2:*' DEBUG_COLORS='true' DEBUG_DEPTH='3' nodemon ./bin/www"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
