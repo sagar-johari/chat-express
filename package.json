@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "powershell -Command \"$env:DEBUG='myapp2:*'; $env:DEBUG_COLORS='true'; $env:DEBUG_DEPTH='3'; npx nodemon ./bin/www\""
+    "start": "cross-env DEBUG='myapp2:*' DEBUG_COLORS='true' DEBUG_DEPTH='3' node ./bin/www",
+    "dev": "cross-env DEBUG='myapp2:*' DEBUG_COLORS='true' DEBUG_DEPTH='3' nodemon ./bin/www"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
@@ -21,6 +22,7 @@
     "socket.io": "^4.8.1"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "nodemon": "^3.1.10"
   }
 }
