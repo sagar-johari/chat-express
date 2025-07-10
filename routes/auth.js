@@ -75,7 +75,7 @@ const jwt = require('jsonwebtoken');
     // Send refresh token in HTTP-only cookie
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
-      secure: false, // Change to true in production with HTTPS
+      secure: process.env.NODE_ENV === 'production', // true in production with HTTPS
       sameSite: 'strict',
       maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     });
@@ -130,7 +130,7 @@ const jwt = require('jsonwebtoken');
       // Clear the cookie
       res.clearCookie('refreshToken', {
         httpOnly: true,
-        secure: false, // set to true in production with HTTPS
+        secure: process.env.NODE_ENV === 'production', // true in production with HTTPS
         sameSite: 'strict'
       });
   
